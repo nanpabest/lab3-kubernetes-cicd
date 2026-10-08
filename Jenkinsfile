@@ -34,7 +34,7 @@ pipeline {
             steps {
                 container('node') {
                     sh '''
-                        pnpm test -- --runInBand
+                        pnpm test --runInBand
                     '''
                 }
             }
