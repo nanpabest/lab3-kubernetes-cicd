@@ -1,98 +1,328 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+LABORATORIO 3 - CI/CD SOBRE KUBERNETES
+RESUMEN
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Implementación de un flujo CI/CD para una aplicación NestJS utilizando Docker, Kubernetes y Jenkins con agentes Kubernetes efímeros.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Repositorio:
+https://github.com/nanpabest/lab3-kubernetes-cicd.git
 
-## Description
+Pipeline:
+install -> test -> build -> push -> deploy
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Resultado final:
+Finished: SUCCESS
 
-## Project setup
+STACK
 
-```bash
-$ pnpm install
-```
+Aplicación Original: NestJS / Node.js 24
+Dependencias: pnpm
+Pruebas: Jest
+Contenedores: Docker
+Orquestación: Kubernetes de Docker Desktop
+CI/CD: Jenkins
+SCM: GitHub
+Registry principal: Docker Hub
+Registry adicional validado: GitHub Container Registry
 
-## Compile and run the project
+RECURSOS
 
-```bash
-# development
-$ pnpm run start
+Namespace:
+ns-hernan-contreras
 
-# watch mode
-$ pnpm run start:dev
+Deployment:
+app-hernan-contreras
 
-# production mode
-$ pnpm run start:prod
-```
+Service:
+svc-hernan-contreras
 
-## Run tests
+ConfigMap:
+config-hernan-contreras
 
-```bash
-# unit tests
-$ pnpm run test
+Secret:
+secret-hernan-contreras
 
-# e2e tests
-$ pnpm run test:e2e
+Job Jenkins:
+lab3-hernan-contreras
 
-# test coverage
-$ pnpm run test:cov
-```
+Imagen utilizada por Kubernetes:
+hernancontreras/tarea-final:hernan-contreras
 
-## Deployment
+Imagen versionada:
+hernancontreras/tarea-final:3.0.0
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+ARCHIVOS PRINCIPALES
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Dockerfile
+.dockerignore
+Jenkinsfile
+agent.yaml
+entrega.yaml
+evidencias/
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+VALIDACIÓN LOCAL
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Instalar dependencias:
 
-## Resources
+corepack enable
 
-Check out a few resources that may come in handy when working with NestJS:
+pnpm install --frozen-lockfile
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Ejecutar pruebas:
 
-## Support
+pnpm test --runInBand
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Construir aplicación:
 
-## Stay in touch
+pnpm build
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Construir imagen Docker:
 
-## License
+docker build -t hernancontreras/tarea-final:3.0.0 -t hernancontreras/tarea-final:hernan-contreras .
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Publicar imagen:
+
+docker push hernancontreras/tarea-final:3.0.0
+
+docker push hernancontreras/tarea-final:hernan-contreras
+
+KUBERNETES
+
+Aplicar manifiestos:
+
+kubectl apply -f entrega.yaml
+
+Verificar Pods:
+
+kubectl get pods -n ns-hernan-contreras
+
+Verificar Deployment:
+
+kubectl get deployment app-hernan-contreras -n ns-hernan-contreras -o wide
+
+Verificar Service:
+
+kubectl get svc svc-hernan-contreras -n ns-hernan-contreras
+
+Verificar configuración inyectada:
+
+kubectl exec -n ns-hernan-contreras deployment/app-hernan-contreras -- printenv | Select-String "AMBIENTE|API_KEY"
+
+El Deployment mantiene 2 réplicas y utiliza:
+
+hernancontreras/tarea-final:hernan-contreras
+
+PRUEBA FUNCIONAL
+
+Exponer temporalmente el Service:
+
+kubectl port-forward svc/svc-hernan-contreras 8080:80 -n ns-hernan-contreras
+
+Consultar:
+
+curl.exe http://localhost:8080/lab
+
+Durante la validación final se utilizó temporalmente el puerto local 8083 debido a que 8080 estaba ocupado:
+
+kubectl port-forward svc/svc-hernan-contreras 8083:80 -n ns-hernan-contreras
+
+curl.exe http://localhost:8083/lab
+
+El endpoint /lab confirmó la lectura de:
+
+AMBIENTE
+API_KEY
+
+JENKINS
+
+Jenkins fue instalado dentro del clúster mediante Helm:
+
+helm repo add jenkins https://charts.jenkins.io
+
+helm repo update
+
+kubectl create namespace jenkins
+
+helm install jenkins jenkins/jenkins -n jenkins
+
+Acceso local:
+
+kubectl --namespace jenkins port-forward svc/jenkins 9090:8080
+
+URL:
+
+http://localhost:9090
+
+KUBERNETES CLOUD
+
+URL:
+
+https://kubernetes.default
+
+Namespace:
+
+jenkins
+
+Conexión validada:
+
+Connected to Kubernetes v1.36.1
+
+La autenticación se configuró mediante una credencial Jenkins asociada al ServiceAccount jenkins.
+
+Generación del token:
+
+kubectl create token jenkins -n jenkins --duration=24h
+
+ID de credencial:
+
+kubernetes-jenkins-token
+
+La CA del clúster utilizada por Jenkins se obtuvo mediante:
+
+kubectl exec -n jenkins jenkins-0 -c jenkins -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+
+CREDENCIALES
+
+Docker Hub:
+
+ID:
+dockerhub-credentials
+
+Tipo:
+Username with password
+
+Usuario:
+hernancontreras
+
+Password:
+Docker Hub Personal Access Token
+
+Los secretos no se encuentran escritos directamente en Jenkinsfile.
+
+RBAC
+
+El ServiceAccount:
+
+system:serviceaccount:jenkins:jenkins
+
+dispone de permisos namespace-scoped para operar el Deployment.
+
+Validación:
+
+kubectl auth can-i get deployments.apps -n ns-hernan-contreras --as=system:serviceaccount:jenkins:jenkins
+
+kubectl auth can-i patch deployments.apps -n ns-hernan-contreras --as=system:serviceaccount:jenkins:jenkins
+
+Resultado:
+
+yes
+
+AGENTE JENKINS
+
+agent.yaml define un Pod efímero con:
+
+node:24-alpine
+docker:27-cli
+docker:27-dind
+bitnami/kubectl:latest
+jnlp
+
+Responsabilidades:
+
+node:
+install / test
+
+docker:
+build / push
+
+dind:
+Docker daemon
+
+kubectl:
+deploy
+
+El contenedor kubectl utiliza:
+
+runAsUser: 1000
+runAsGroup: 1000
+
+PIPELINE
+
+install:
+corepack enable
+pnpm install --frozen-lockfile
+
+test:
+pnpm test --runInBand
+
+Resultado validado:
+2 suites aprobadas
+5 tests aprobados
+
+build:
+construcción de los tags 3.0.0 y hernan-contreras
+
+push:
+publicación en Docker Hub utilizando Jenkins Credentials
+
+deploy:
+actualización y rollout del Deployment Kubernetes
+
+JOB
+
+Nombre:
+lab3-hernan-contreras
+
+Definición:
+Pipeline script from SCM
+
+Repositorio:
+https://github.com/nanpabest/lab3-kubernetes-cicd.git
+
+Branch:
+*/main
+
+Script Path:
+Jenkinsfile
+
+VALIDACIÓN FINAL
+
+Deployment:
+
+READY: 2/2
+UP-TO-DATE: 2
+AVAILABLE: 2
+
+Imagen:
+
+hernancontreras/tarea-final:hernan-contreras
+
+Pods:
+
+2 Running
+
+Pipeline:
+
+Finished: SUCCESS
+
+Endpoint:
+
+/lab operativo
+
+EVIDENCIAS
+
+evidencias/01-cluster-info.txt
+evidencias/02-nodes.txt
+evidencias/03-pods.txt
+evidencias/04-deployment.txt
+evidencias/05-service.txt
+evidencias/06-logs.txt
+evidencias/07-printenv.txt
+evidencias/08-configmap.txt
+evidencias/09-secret.txt
+evidencias/10-port-forward.txt
+evidencias/11-curl-lab.txt
+evidencias/12-pods-post-jenkins.txt
+evidencias/13-deployment-post-jenkins.txt
+evidencias/14-printenv-post-jenkins.txt
+evidencias/15-curl-lab-post-jenkins.txt
+log-pipeline-jenkins.txt
